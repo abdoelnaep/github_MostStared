@@ -8,52 +8,91 @@
 import UIKit
 
 class MostStaredVC: UIViewController {
-    @IBOutlet weak var repositoriesTableView: UITableView!
-    
-    
-    var repositories:[repoElement] = []
+    @IBOutlet var repositoriesTableView: UITableView!
+    var pageNumper = 1
+    var hasMoreStars = true
+    var repositories: [repoElement] = []
+    var last30Days: Date = .init()
+    var dateString: String = ""
+    var dateStringPassed: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        getTargetDate()
         configureTableView()
-        getRepositories()
+        getRepositories(pageNumber: 1, dateString: dateString)
+    }
+    
+    func getTargetDate() {
+        let currentDate = Date()
+        var dateComponent = DateComponents()
+        dateComponent.day = -30
+        last30Days = Calendar.current.date(byAdding: dateComponent, to: currentDate)!
+        print(currentDate)
+        print(last30Days)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en")
 
-        // Do any additional setup after loading the view.
+        dateString = dateFormatter.string(from: last30Days)
+        print(dateString)
     }
     
     func configureTableView() {
         repositoriesTableView.register(UINib(nibName: String(describing:
-        RepositoryCell.self), bundle: nil), forCellReuseIdentifier:
-             String (describing: RepositoryCell.self))
+            RepositoryCell.self), bundle: nil), forCellReuseIdentifier:
+        String(describing: RepositoryCell.self))
     }
 
-    func getRepositories() {
-        APIService.sharedService.getRepositories { (repositories: repos?,
-            error) in
-            guard let repositories = repositories else {
-                return
-            }
-            print(repositories)
-            self.repositories = repositories.items
-            DispatchQueue.main.async {
-                self.repositoriesTableView.reloadData()
-            }
-    }
+    func getRepositories(pageNumber: Int, dateString: String) {
+        showLoadingView()
+        APIService.sharedService.getRepositories(pageNum: pageNumper, past30Days: dateString) { (repositories: repos?,_) in
+                self.dismissLoadingView()
+                guard let repositories = repositories else {
+                    return
+                }
+                if repositories.items.count < 30 {
+                    self.hasMoreStars = false
+                }
+             
+                self.repositories.append(contentsOf: repositories.items)
+
+                DispatchQueue.main.async {
+                    self.repositoriesTableView.reloadData()
+                }
+        }
     }
 }
 
-//MARK:
-extension MostStaredVC: UITableViewDataSource {
+extension MostStaredVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-        -> Int {
-//            TableviewDataSource
-            repositories.count
+        -> Int
+    {
+        repositories.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->
-        UITableViewCell {
+        UITableViewCell
+    {
         guard let cell = repositoriesTableView.dequeueReusableCell(withIdentifier:
-             String(describing: RepositoryCell.self), for: indexPath) as?
-            RepositoryCell else {return UITableViewCell()}
+            String(describing: RepositoryCell.self), for: indexPath) as?
+            RepositoryCell else { return UITableViewCell() }
         cell.configureCell(with: repositories[indexPath.row])
+        
         return cell
+    }
+ 
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard hasMoreStars else { return }
+            
+        if scrollView == repositoriesTableView {
+            if (scrollView.contentOffset.y + scrollView.frame.size.height) >=
+                (scrollView.contentSize.height)
+            {
+                pageNumper += 1
+                getRepositories(pageNumber: pageNumper, dateString: dateString)
+            }
+        }
     }
 }

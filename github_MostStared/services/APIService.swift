@@ -9,7 +9,7 @@ import Foundation
 class APIService {
     static let sharedService = APIService()
     func getRepositories(pageNum:Int,past30Days:String,completion: @escaping (_ repositories: repos?, _ error: Error?) -> Void) {
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=created:%3E\(past30Days)&sort=stars&ord%20er=desc&page=\(pageNum)")
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=created:%3E\(past30Days)+language:swift&sort=stars&order=desc&page=\(pageNum)")
 //        guard let url = URL(string: "https://api.github.com/repositories")
         else { return }
         print(url)
@@ -38,3 +38,6 @@ class APIService {
 
 //"https://api.github.com/repositories"
 //                https://api.github.com/search/repositories?q=created:%3E2017-10-22&sort=stars&ord%20er=desc
+
+
+//https://api.github.com/search/repositories?q=created:%3E2022-03-15+language:swift&sort=stars&ord%20er=desc&page=1

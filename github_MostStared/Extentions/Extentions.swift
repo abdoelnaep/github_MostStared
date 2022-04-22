@@ -5,7 +5,7 @@
 //  Created by Abdullah on 13/04/2022.
 //
 
-import SDWebImage
+//import SDWebImage
 import UIKit
 
 var imageCache = NSCache<AnyObject, AnyObject>()
@@ -31,9 +31,9 @@ extension UIImageView {
         }
     }
         
-    func loadfromURL(_ url: String?) {
-        sd_setImage(with: URL(string: url ?? ""), placeholderImage: UIImage(named: "Image-Placeholder"))
-    }
+//    func loadfromURL(_ url: String?) {
+//        sd_setImage(with: URL(string: url ?? ""), placeholderImage: UIImage(named: ""))
+//    }
 }
 
 private var containerView: UIView!

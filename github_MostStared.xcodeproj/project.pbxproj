@@ -19,6 +19,7 @@
 		B8218A902806B409003D36D8 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8218A8E2806B409003D36D8 /* RepositoryCell.xib */; };
 		B8218A932806B641003D36D8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8218A922806B641003D36D8 /* APIService.swift */; };
 		B8218A972807705B003D36D8 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8218A962807705B003D36D8 /* Extentions.swift */; };
+		B8222591281352F0006D1D11 /* ReposVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8222590281352F0006D1D11 /* ReposVM.swift */; };
 		F39CEC922B5F147A27390B61 /* Pods_github_MostStared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B53965C7993B7262947535 /* Pods_github_MostStared.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		B8218A8E2806B409003D36D8 /* RepositoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
 		B8218A922806B641003D36D8 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		B8218A962807705B003D36D8 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		B8222590281352F0006D1D11 /* ReposVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,6 @@
 				90F050B4588690521F8A6A5A /* Pods-github_MostStared.debug.xcconfig */,
 				973B9F3FF2999E5A852EE4D8 /* Pods-github_MostStared.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -93,18 +94,17 @@
 		B8218A6C2806AF8A003D36D8 /* github_MostStared */ = {
 			isa = PBXGroup;
 			children = (
+				B8222592281367E1006D1D11 /* Models */,
+				B822259328136813006D1D11 /* Views */,
+				B822258F281352CF006D1D11 /* ViewModels */,
 				B8218A912806B619003D36D8 /* services */,
-				B8218A882806B3B2003D36D8 /* cells */,
-				B8218A6D2806AF8A003D36D8 /* AppDelegate.swift */,
-				B8218A6F2806AF8A003D36D8 /* SceneDelegate.swift */,
-				B8218A842806B168003D36D8 /* MostStaredVC.swift */,
-				B8218A862806B29F003D36D8 /* RepositoriesModel.swift */,
+				B82225942813698D006D1D11 /* Extentions */,
+				B82225952813699E006D1D11 /* Core */,
 				B8218A732806AF8A003D36D8 /* Main.storyboard */,
 				B8218A792806AF8E003D36D8 /* Assets.xcassets */,
 				B8218A7B2806AF8E003D36D8 /* LaunchScreen.storyboard */,
 				B8218A7E2806AF8E003D36D8 /* Info.plist */,
 				B8218A762806AF8A003D36D8 /* github_MostStared.xcdatamodeld */,
-				B8218A962807705B003D36D8 /* Extentions.swift */,
 			);
 			path = github_MostStared;
 			sourceTree = "<group>";
@@ -124,6 +124,48 @@
 				B8218A922806B641003D36D8 /* APIService.swift */,
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		B822258F281352CF006D1D11 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B8222590281352F0006D1D11 /* ReposVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B8222592281367E1006D1D11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B8218A862806B29F003D36D8 /* RepositoriesModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B822259328136813006D1D11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B8218A882806B3B2003D36D8 /* cells */,
+				B8218A842806B168003D36D8 /* MostStaredVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B82225942813698D006D1D11 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				B8218A962807705B003D36D8 /* Extentions.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		B82225952813699E006D1D11 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B8218A6D2806AF8A003D36D8 /* AppDelegate.swift */,
+				B8218A6F2806AF8A003D36D8 /* SceneDelegate.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +287,7 @@
 				B8218A852806B168003D36D8 /* MostStaredVC.swift in Sources */,
 				B8218A932806B641003D36D8 /* APIService.swift in Sources */,
 				B8218A6E2806AF8A003D36D8 /* AppDelegate.swift in Sources */,
+				B8222591281352F0006D1D11 /* ReposVM.swift in Sources */,
 				B8218A782806AF8A003D36D8 /* github_MostStared.xcdatamodeld in Sources */,
 				B8218A972807705B003D36D8 /* Extentions.swift in Sources */,
 				B8218A8F2806B409003D36D8 /* RepositoryCell.swift in Sources */,

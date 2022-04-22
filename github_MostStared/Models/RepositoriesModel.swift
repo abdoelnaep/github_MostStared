@@ -7,33 +7,22 @@
 
 import Foundation
 
-
-//struct Repository: Codable {
-//    let name: String?
-//}
-
-
-//struct Repositories:Codable{
-//    let repoElement:items
-//}
-//
-//
-struct repos:Codable{
-    let items:[repoElement]
+struct Repos:Codable{
+    let items:[RepoElement]
 }
 
-struct repoElement:Codable{
+struct RepoElement:Codable{
     let name:String?
     let description:String?
     let stargazers_count:Int?
     let open_issues_count:Int?
     let updated_at:String?
     let created_at:String?
-    let owner:ownerData
+    let owner:OwnerData
 
 }
 
-struct ownerData:Codable{
+struct OwnerData:Codable{
     let login:String?
     let avatar_url:String?
 }

@@ -1,20 +1,14 @@
 //
-//  APIService.swift
-//  github_MostStared
+//  MockAPIService.swift
+//  github_MostStaredTests
 //
-//  Created by Abdullah on 13/04/2022.
+//  Created by Abdullah on 23/04/2022.
 //
 
 import Foundation
+@testable import github_MostStared
 
-protocol APIProtocol{
-    func getRepositories(pageNum:String,past30Days:String,completion:  @escaping(Result<Repos, Error>) -> Void)
-}
-
-
-
-class APIService:APIProtocol {
-    static let sharedService = APIService()
+class MockApiService: APIProtocol{
     func getRepositories(pageNum:String,past30Days:String,completion: @escaping(Result<Repos, Error>) -> Void) {
         guard let url = URL(string: "https://api.github.com/search/repositories?q=created:%3E\(past30Days)&sort=stars&order=desc&page=\(pageNum)&per_page=100")
 //        guard let url = URL(string: "https://api.github.com/repositories")
@@ -45,12 +39,3 @@ class APIService:APIProtocol {
         task.resume()
     }
 }
-
-//"https://api.github.com/repositories"
-//                https://api.github.com/search/repositories?q=created:%3E2017-10-22&sort=stars&ord%20er=desc
-
-
-//https://api.github.com/search/repositories?q=created:%3E2022-03-15+language:swift&sort=stars&ord%20er=desc&page=1
-
-
-//https://api.github.com/search/repositories?q=created:%3E2022-03-15+language:swift+swiftin%3Aname,description&sort=stars&order=desc&page=1

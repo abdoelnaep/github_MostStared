@@ -33,7 +33,10 @@ class MostStaredVC: UIViewController {
 
         reposVM.getReps(pageNumber: "\(pageNumber)") { _, _ in
             self.dismissLoadingView()
-
+            
+            if self.reposVM.numbOfRows() < 30 {
+                self.hasMoreStars = false
+            }
             DispatchQueue.main.async {
                 self.repositoriesTableView.reloadData()
             }
@@ -67,6 +70,10 @@ extension MostStaredVC: UITableViewDataSource, UITableViewDelegate {
             {
                 pageNumber += 1
                 getRepositories(pageNumber: pageNumber)
+                
+                if reposVM.numbOfRows() < 30 {
+                    hasMoreStars = false
+                }
             }
         }
     }

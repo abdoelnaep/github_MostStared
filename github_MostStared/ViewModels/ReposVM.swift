@@ -35,8 +35,7 @@ class ReposVM {
     }
     
     func getReps(pageNumber: String, completion: @escaping ([RepoCellVM]?, Error?) -> Void) {
-        repoService.getRepositories(pageNum: pageNumber, past30Days: getTargetDate(), completion: {
-            result in
+        repoService.getRepositories(pageNum: pageNumber, past30Days: getTargetDate()) { result in
             switch result {
                 case .success(let repos):
                     self.repos += repos.items.map {
@@ -48,8 +47,10 @@ class ReposVM {
                     completion(nil, error)
             }
         
-        })
+        }
     }
+    
+    
     func numbOfRows() -> Int{
             return repos.count
         }

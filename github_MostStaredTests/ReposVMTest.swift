@@ -25,7 +25,7 @@ class ReposVMTest: XCTestCase {
     
     func test_loadSuccess(){
         let expectaion = self.expectation(description: "repos returned successfuly from api")
-        viewModel.getReps(pageNumber: "\(0)") { cells, error in
+        viewModel.getReps(pageNumber: "1") { cells, error in
             XCTAssertNotNil(cells)
             XCTAssertNil(error)
             expectaion.fulfill()
@@ -35,11 +35,16 @@ class ReposVMTest: XCTestCase {
     
     func test_loadFailed(){
         let expectaion = self.expectation(description: "repos failed returned from api")
-        viewModel.getReps(pageNumber: "\(10000)" ) { cells, error in
+        viewModel.getReps(pageNumber: "10000") { cells, error in
             XCTAssertNil(cells)
             XCTAssertNotNil(error)
+            
+//            XCTAssertNotNil(cells)
+//            XCTAssertNil(error)
             expectaion.fulfill()
         }
         waitForExpectations(timeout: 6, handler: nil)
     }
+    
+
 }

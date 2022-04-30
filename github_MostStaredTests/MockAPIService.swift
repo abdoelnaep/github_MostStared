@@ -13,7 +13,7 @@ class MockApiService: APIProtocol{
         guard let url = URL(string: "https://api.github.com/search/repositories?q=created:%3E\(past30Days)&sort=stars&order=desc&page=\(pageNum)&per_page=100")
 //        guard let url = URL(string: "https://api.github.com/repositories")
         else { return }
-        print(url)
+//        print(url)
         let session = URLSession.shared
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { data, response, error in
